@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			pokemon:{},
 			demo: [
 				{
 					title: "FIRST",
@@ -23,6 +24,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
+				fetch("https://pokeapi.co/api/v2/pokemon/")
+				.then(resp=> resp.json())
+				.then(data=>{
+					console.log(data);
+					setStore({pokemon: data})
+					//setStore es una función que modifica store, un elemento del objeto y tengo que indicar cual
+				})
+				.catch(error=>console.log(error))
 			},
 			changeColor: (index, color) => {
 				//get the store
